@@ -1,0 +1,49 @@
+*{
+}
+
+p{
+    color: red;
+}
+
+body{
+    background-color: lightpink;
+
+    margin: 0;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+header{
+    background-color: aquamarine;
+
+    position: absolute;
+    top: 0px;
+    width: 100vw;
+    
+}
+
+.bonbon-container{
+    border: solid black 1px;
+
+    width: 500px;
+
+    display: flex;
+    align-self: center;
+    justify-content: space-around;
+}
+
+#bonbon-1,#bonbon-2,#bonbon-3{
+    width: 100px;
+    height: 100px;
+}
+
+
+
+.red{
+    background-color: red;
+}
