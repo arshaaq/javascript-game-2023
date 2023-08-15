@@ -9,20 +9,28 @@
 </head>
 <body>
     <header>lol</header>
+    <section class="status-container">
+        <p id="status-text">wait</p>
+    </section>
+
     <section class="bonbon-container">
 
         <div id="bonbon-1-container">
-            <img src="images/bonbon.png" id="bonbon-1" class="bonbon" sound="drums.mp3" alt="bonbon">
+            <img src="images/bonbon.png" id="bonbon-0" class="bonbon" sound="drums.mp3" order="0" alt="bonbon">
         </div>
 
         <div id="bonbon-2-container">
-            <img src="images/bonbon.png" id="bonbon-2" class="bonbon" sound="piano.mp3" alt="bonbon">
+            <img src="images/bonbon.png" id="bonbon-1" class="bonbon" sound="piano.mp3" order="1" alt="bonbon">
         </div>
 
         <div id="bonbon-3-container">
-            <img src="images/bonbon.png" id="bonbon-3" class="bonbon" sound="trumpet.mp3" alt="bonbon">
+            <img src="images/bonbon.png" id="bonbon-2" class="bonbon" sound="trumpet.mp3" order="2" alt="bonbon">
         </div>
 
+    </section>
+
+    <section class="playButton-container">
+        <button onclick="playGame(bonbons,gameStages)" id="playButton">play</button>
     </section>
     
 </body>
