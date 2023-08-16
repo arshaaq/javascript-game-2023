@@ -1,13 +1,32 @@
 const bonbons = document.getElementsByClassName("bonbon");
 const sounds = ["drums.mp3","piano.mp3","trumpet.mp3"]
-const gameStages = [0,1,2];
+const gameStages = [];
+statusText = document.getElementById("status-text");
 
+const highScore = 0;
+const highScoreText = document.getElementById("highScore-text");
+highScoreText.textContent=(`${highScore}`);
+
+
+
+//pause function to stop the program for x milliseconds
+function pause(milliseconds) {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
 
 //the function that will be used to play the bonbon
 function playBonbon(element){
     element.classList.add("red");
     const audio = new Audio(`sounds/${element.getAttribute("sound")}`);
     audio.play();
+    setTimeout(() => {
+        element.classList.remove("red");
+    }, 1000);
+    
+}
+
+function changeInnerText(textContainer, desiredText){
+    textContainer.textContent = desiredText; 
 }
 
 function addGameStage(bonbons,gameStages){
@@ -15,19 +34,17 @@ function addGameStage(bonbons,gameStages){
 
         //add current bonbon stage to the game array
         gameStages.push(bonbonPicked);
-
-        //play the stage for the user
-        playBonbon(bonbons[bonbonPicked]); 
 }
 
-function playThroughGameStages(gameStages,bonbons){
-    for(i=0; i<gameStages.length; i++){
-        console.log(gameStages[i]);
-        setTimeout(() => {
-            console.log("One second has passed!");
-        }, 3000); // 1000 milliseconds = 1 second
-        
-        
+async function playThroughGameStages(gameStages,bonbons, statusText){
+
+    
+
+    changeInnerText(statusText,"pay attention!");
+
+    for (let i = 0; i < gameStages.length; i++) {
+        playBonbon(bonbons[gameStages[i]]);
+        await pause(1000);
     }
 }
 
@@ -50,19 +67,12 @@ function waitForClick(bonbons) {
     
 }
 
-async function userTurn(gameStage,bonbons) {
-   userChoice = await waitForClick(bonbons).then(result=>{
+async function userTurn(bonbons) {
+    userChoice = await waitForClick(bonbons).then(result=>{
         return result;
     });
 
-    if(gameStage == userChoice){
-        console.log("you win!")
-    } else {
-        console.log(userChoice);
-        console.log("you lose!");
-    }
-
-    console.log("end of function");
+    return userChoice;
 }
 
 
@@ -81,31 +91,68 @@ for(i=0; i<bonbons.length;i++){
 }
 
 //play the game function
-function playGame(bonbons, gameStages){
+async function playGame(bonbons, gameStages, statusText, highScore, highScoreText){
+    console.log(highScore);
+    
+    //resets the game
+    userLoss = false;
+    gameStages = [];
 
-    //if the game stages aren't defined, start it off!
-    if(gameStages.length == 0){
-        
+    changeInnerText(statusText,"ready?");
+    
+    //while the user hasn't lost yet
+    while(userLoss==false){
+        //add a step!
         addGameStage(bonbons, gameStages);
+                
+        //changeInnerText(statusText,"pay attention!");
 
-    //if the game stages exist, its time to play the game
-    }else{
-
-         for (let i = 0; i < gameStages.length; i++) {
-            (function(index) {
-                setTimeout(() => {
-                    console.log(index);
-                    playBonbon(bonbons[gameStages[index]]);
-                    console.log("lol");
-                }, 1000 * (index + 1));
-            })(i);
-
-            //userTurn(gameStages[i],bonbons);
-        }
+        
+        //showcases the user the pattern they need to follow
+    await playThroughGameStages(gameStages,bonbons, statusText);
 
        
-    }
 
+        
+        
+        
+        for(i=0; i<gameStages.length; i++){
+           changeInnerText(statusText,"your turn!");
+
+            userChoice = await (userTurn(bonbons)).then(result=>{
+                return result;
+            });
+            
+            //if the user gets the current step correct keep going
+            if(userChoice == gameStages[i]){
+                continue;
+            //if they fail break out of the loop
+            } else {
+                changeInnerText(statusText,"you lose!");
+                userLoss = true;
+                await pause(1000);
+                break;
+            }    
+        } 
+        if(userLoss != true){
+            changeInnerText(statusText,"good job!");
+            await pause(1000);
+
+            if(highScore <= gameStages.length){
+                highScore = gameStages.length;
+                changeInnerText(highScoreText,`${highScore}`);
+            }
+            
+        } else{
+            changeInnerText(statusText,"press the play button to try again!");
+            await pause(1000);
+        }
+
+
+        
+
+        
+   } 
     
 }
 

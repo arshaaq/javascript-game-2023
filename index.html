@@ -9,8 +9,14 @@
 </head>
 <body>
     <header>lol</header>
+
+    <section class="highScore-container">
+        <span>current highest score: </span>
+        <span id="highScore-text"></span>
+    </section>
+
     <section class="status-container">
-        <p id="status-text">wait</p>
+        <p id="status-text">press the play button to begin!</p>
     </section>
 
     <section class="bonbon-container">
@@ -30,7 +36,7 @@
     </section>
 
     <section class="playButton-container">
-        <button onclick="playGame(bonbons,gameStages)" id="playButton">play</button>
+        <button onclick="playGame(bonbons,gameStages,statusText,highScore,highScoreText)" id="playButton">play</button>
     </section>
     
 </body>
