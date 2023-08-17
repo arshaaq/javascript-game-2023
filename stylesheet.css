@@ -1,12 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Itim&display=swap');
+
 *{
+
 }
 
-p{
-    color: red;
+h1{
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+span, p{
+    font-family: 'Itim', cursive;
 }
 
 body{
-    background-color: lightpink;
+    background-color: rgb(245, 245, 255);
 
     margin: 0;
     height: 100vh;
@@ -28,9 +35,9 @@ header{
 }
 
 .bonbon-container{
-    border: solid black 1px;
+    
 
-    width: 500px;
+    width: 1000px;
 
     display: flex;
     align-self: center;
@@ -38,10 +45,30 @@ header{
 }
 
 #bonbon-0,#bonbon-1,#bonbon-2{
-    width: 100px;
-    height: 100px;
+    transition-property: width, height;
+    transition-duration: 0.5s;
 }
 
+.unavailable{
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.idle{
+    
+
+    width: 300px;
+    height: 300px;
+
+    opacity: 0.5;
+}
+
+.playing{
+    width: 350px;
+    height: 350px;
+
+    opacity: 1;
+}
 
 
 .red{

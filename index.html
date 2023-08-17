@@ -5,10 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+   
     
 </head>
 <body>
-    <header>lol</header>
+    
+
+    <h1>
+        Bonbon Symphony
+    </h1>
 
     <section class="highScore-container">
         <span>current highest score: </span>
@@ -22,15 +27,15 @@
     <section class="bonbon-container">
 
         <div id="bonbon-1-container">
-            <img src="images/bonbon.png" id="bonbon-0" class="bonbon" sound="drums.mp3" order="0" alt="bonbon">
+            <img src="bonbon_assets/bonbon-0.PNG" id="bonbon-0" class="bonbon idle" sound="0.mp3" order="0" alt="bonbon">
         </div>
 
         <div id="bonbon-2-container">
-            <img src="images/bonbon.png" id="bonbon-1" class="bonbon" sound="piano.mp3" order="1" alt="bonbon">
+            <img src="bonbon_assets/bonbon-1.PNG" id="bonbon-1" class="bonbon idle" sound="1.mp3" order="1" alt="bonbon">
         </div>
 
         <div id="bonbon-3-container">
-            <img src="images/bonbon.png" id="bonbon-2" class="bonbon" sound="trumpet.mp3" order="2" alt="bonbon">
+            <img src="bonbon_assets/bonbon-2.PNG" id="bonbon-2" class="bonbon idle" sound="2.mp3" order="2" alt="bonbon">
         </div>
 
     </section>
@@ -38,6 +43,7 @@
     <section class="playButton-container">
         <button onclick="playGame(bonbons,gameStages,statusText,highScore,highScoreText)" id="playButton">play</button>
     </section>
+
     
 </body>
 <script src="javascript.js"></script>
