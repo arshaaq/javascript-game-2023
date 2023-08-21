@@ -16,7 +16,7 @@ body{
     background-color: rgb(245, 245, 255);
 
     margin: 0;
-    height: 100vh;
+   
 
     display: flex;
     flex-direction: column;
@@ -26,27 +26,95 @@ body{
 }
 
 header{
-    background-color: aquamarine;
+    position: relative;
+    border-bottom: black solid 2.5px;
+    width: 100%;
 
-    position: absolute;
-    top: 0px;
-    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 0.5fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "sound title controls";
+
+    height: 100px;
     
+}
+
+.sound-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: sound;
+
+    text-align: center;
+    
+
+    
+}
+
+#soundSlider {
+    width: 10px;
+}
+
+.highScore-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playButton-container{
+    grid-area: controls;
+    display: flex;
+    justify-content: center;
+}
+
+#playButton{
+    font-family: 'Itim', cursive;
+    font-weight: 400px;
+    font-size: 15px;
+
+    border: 2.5px solid black;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+
+    margin-top: 15px;
+
+    background-color: rgb(245, 245, 255);
+}
+
+#playButton:hover{
+    background-color: rgb(223, 223, 237);
+}
+
+.main-title{
+    font-size: 25px;
+    text-align: center;
+    grid-area: title;
+}
+
+.status-container{
+    position: relative;
+    top: 50px;
+    text-align: center;
 }
 
 .bonbon-container{
+    position: absolute;
+    top: 40%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
     
-
-    width: 1000px;
-
-    display: flex;
-    align-self: center;
-    justify-content: space-around;
 }
 
 #bonbon-0,#bonbon-1,#bonbon-2{
-    transition-property: width, height;
-    transition-duration: 0.5s;
+    /* transition-property: width, height;
+    transition-duration: 0.5s; */
 }
 
 .unavailable{
@@ -55,22 +123,49 @@ header{
 }
 
 .idle{
-    
-
     width: 300px;
     height: 300px;
-
     opacity: 0.5;
 }
 
 .playing{
-    width: 350px;
-    height: 350px;
-
+    width: 300px;
+    height: 300px;
     opacity: 1;
 }
 
 
-.red{
-    background-color: red;
+
+#status-text{
+    font-size: 18px;
+}
+
+@media (max-width: 600px) {
+
+    .status-container{
+        position: relative;
+        top: 20px;
+        text-align: center;
+    }
+
+    .bonbon-container {
+        top: 35%;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
+    }
+
+    .idle{
+        width: 100px;
+        height: 100px;
+        opacity: 0.5;
+    }
+    
+    .playing{
+        width: 100px;
+        height: 100px;
+        /* width: 105px;
+        height: 105px; */
+        opacity: 1;
+    }
+    
 }

@@ -7,8 +7,10 @@ const statusText = document.getElementById("status-text");
 
 let highScore = 0;
 const highScoreText = document.getElementById("highScore-text");
-highScoreText.textContent=(`${highScore}`);
+highScoreText.textContent=(`current highest score: ${highScore}`);
 
+const playButton = document.getElementById("playButton");
+const soundSlider = document.getElementById("soundSlider");
 
 //-----------------------------FUNCTIONS------------------------------//
 
@@ -18,8 +20,24 @@ function pause(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
+function playButtonInactive(trueOrFalse){
+    if(trueOrFalse == true){
+        playButton.disabled = true;
+    } else {
+        playButton.disabled = false;
+    }
+    
+
+
+}
+
+soundSlider.addEventListener("input", () => {
+    let volume = parseFloat(soundSlider.value);
+});
+
 //the function that will be used to play the bonbon
 function playBonbon(element){
+
     //goes through the list of bonbons and finds the correct one given what was clicked
     for(i=0; i<bonbons.length; i++){
         
@@ -29,6 +47,7 @@ function playBonbon(element){
 
             element.src = `bonbon_assets/bonbon-${i}-play.GIF`;
             const audio = new Audio(`sounds/${i}.mp3`);
+            audio.volume = soundSlider.value;
             audio.play();
 
             setTimeout(() => {
@@ -122,10 +141,12 @@ for(let i=0; i<bonbons.length;i++){
     });
 
 }
+
 bonbonsUnavailabe(true);
 
 //play the game function
 async function playGame(bonbons, gameStages, statusText, highScore, highScoreText){
+    
     
     //resets the game
     userLoss = false;
@@ -135,13 +156,15 @@ async function playGame(bonbons, gameStages, statusText, highScore, highScoreTex
     
     //while the user hasn't lost yet
     while(userLoss==false){
+
+        playButtonInactive(true);
         //add a step!
         addGameStage(bonbons, gameStages);
                 
         //changeInnerText(statusText,"pay attention!");
 
         
-        //showcases the user the pattern they need to follow
+    //showcases the user the pattern they need to follow
     await playThroughGameStages(gameStages,bonbons, statusText);
 
        
@@ -154,11 +177,11 @@ async function playGame(bonbons, gameStages, statusText, highScore, highScoreTex
 
             userChoice = await (userTurn(bonbons)).then(result=>{
                 
-                console.log(result);
+                
                 return result;
             });
             
-            console.log("the game stage is: " + gameStages[index] + " and the choice is: " + userChoice);
+            
             //if the user gets the current step correct keep going
             if(userChoice == gameStages[index]){
                 continue;
@@ -166,21 +189,24 @@ async function playGame(bonbons, gameStages, statusText, highScore, highScoreTex
             } else {
                 changeInnerText(statusText,"you lose!");
                 userLoss = true;
-                await pause(1000);
+                await pause(1500);
                 break;
             }    
         } 
         if(userLoss != true){
+            bonbonsUnavailabe(true);
             changeInnerText(statusText,"good job!");
-            await pause(1000);
 
             if(highScore <= gameStages.length){
                 highScore = gameStages.length;
-                changeInnerText(highScoreText,`${highScore}`);
+                changeInnerText(highScoreText,`current highest score: ${highScore}`);
             }
+
+            await pause(1500);
             
         } else{
             changeInnerText(statusText,"press the play button to try again!");
+            playButtonInactive(false);
             bonbonsUnavailabe(true);
             await pause(1000);
         }
