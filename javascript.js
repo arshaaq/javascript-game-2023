@@ -10,10 +10,11 @@ const highScoreText = document.getElementById("highScore-text");
 highScoreText.textContent=(`current highest score: ${highScore}`);
 
 const playButton = document.getElementById("playButton");
+let volume = 1;
 const soundSlider = document.getElementById("soundSlider");
+const speakerButton = document.getElementById("speaker_container");
 
 //-----------------------------FUNCTIONS------------------------------//
-
 
 //pause function to stop the program for x milliseconds
 function pause(milliseconds) {
@@ -31,10 +32,6 @@ function playButtonInactive(trueOrFalse){
 
 }
 
-soundSlider.addEventListener("input", () => {
-    let volume = parseFloat(soundSlider.value);
-});
-
 //the function that will be used to play the bonbon
 function playBonbon(element){
 
@@ -47,7 +44,7 @@ function playBonbon(element){
 
             element.src = `bonbon_assets/bonbon-${i}-play.GIF`;
             const audio = new Audio(`sounds/${i}.mp3`);
-            audio.volume = soundSlider.value;
+            audio.volume = volume;
             audio.play();
 
             setTimeout(() => {
@@ -132,6 +129,38 @@ async function userTurn(bonbons) {
 }
 
 //--------------SETTING UP THE PAGE--------------//
+
+//adds speaker event listener
+speakerButton.addEventListener("click", () => {
+    switch (volume) {
+        case 1:
+            volume = 0.5;
+            speakerButton.classList.remove("speaker_high");
+            speakerButton.classList.add("speaker_medium");
+            break;
+        case 0.5:
+            volume = 0.25;
+            speakerButton.classList.remove("speaker_medium");
+            speakerButton.classList.add("speaker_low");
+            break;
+        case 0.25:
+            volume = 0;
+            speakerButton.classList.remove("speaker_low");
+            speakerButton.classList.add("speaker_mute");
+            break;
+        case 0:
+            volume = 1;
+            speakerButton.classList.remove("speaker_mute");
+            speakerButton.classList.add("speaker_high");
+            break;
+        default:
+            volume = 1;
+            speakerButton.classList.remove("speaker_mute");
+            speakerButton.classList.add("speaker_high");
+            break;
+    }
+});
+
 //adds clickable options for bonbons
 for(let i=0; i<bonbons.length;i++){
     
