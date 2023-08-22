@@ -143,16 +143,16 @@ speakerButton.classList.add("speaker_high");
 speakerButton.addEventListener("click", () => {
     switch (volume) {
         case 1:
-            volume = 0.5;
+            volume = 0.4;
             speakerButton.classList.remove("speaker_high");
             speakerButton.classList.add("speaker_medium");
             break;
-        case 0.5:
-            volume = 0.25;
+        case 0.4:
+            volume = 0.1;
             speakerButton.classList.remove("speaker_medium");
             speakerButton.classList.add("speaker_low");
             break;
-        case 0.25:
+        case 0.1:
             volume = 0;
             speakerButton.classList.remove("speaker_low");
             speakerButton.classList.add("speaker_mute");
