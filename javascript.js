@@ -42,7 +42,7 @@ function playBonbon(element){
             element.classList.toggle("idle");
             element.classList.toggle("playing");
 
-            element.src = `bonbon_assets/bonbon-${i}-play.GIF`;
+            element.src = `./bonbon_assets/bonbon-${i}-play.GIF`;
             const audio = new Audio(`sounds/${i}.mp3`);
             audio.volume = volume;
             audio.play();
@@ -129,15 +129,6 @@ async function userTurn(bonbons) {
 }
 
 //--------------SETTING UP THE PAGE--------------//
-
-//goes through the classes so that images are already preloaded and ready to go on startup
-speakerButton.classList.add("speaker_medium");
-speakerButton.classList.remove("speaker_medium");
-speakerButton.classList.add("speaker_low");
-speakerButton.classList.remove("speaker_low");
-speakerButton.classList.add("speaker_mute");
-speakerButton.classList.remove("speaker_mute");
-speakerButton.classList.add("speaker_high");
 
 //adds speaker event listener
 speakerButton.addEventListener("click", () => {
