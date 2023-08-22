@@ -42,7 +42,7 @@ function playBonbon(element){
             element.classList.toggle("idle");
             element.classList.toggle("playing");
 
-            element.src = `/bonbon_assets/bonbon-${i}-play.gif`;
+            element.src = `bonbon_assets/bonbon-${i}-play.gif`;
             const audio = new Audio(`sounds/${i}.mp3`);
             audio.volume = volume;
             audio.play();
